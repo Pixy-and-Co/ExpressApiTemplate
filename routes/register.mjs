@@ -1,6 +1,6 @@
 import { AsciiTable3 } from 'ascii-table3'
-import { Route } from '../structures/route.mjs'
-import recover from '../handlers/files.handler.mjs'
+import { Route } from '#structs/route.mjs'
+import recover from '#handlers/files.handler.mjs'
 
 export default async function registerRoutes (app) {
     const files = recover('./routes', true)
@@ -12,10 +12,10 @@ export default async function registerRoutes (app) {
     }
 
     for (const file of files) {
-        if (file === 'index.mjs') continue
+        if (file === 'register.mjs') continue
 
         try {
-            let route = await import(`../routes/${file}`)
+            let route = await import(`#routes/${file}`)
             route = route.default
 
             if (route instanceof Array) route.forEach(r => {

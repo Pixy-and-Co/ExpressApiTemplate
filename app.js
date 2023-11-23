@@ -2,7 +2,7 @@ import dotenv from 'dotenv'
 import express from 'express'
 import https from 'https'
 import cors from 'cors'
-import registerRoutes from './routes/index.mjs'
+import registerRoutes from '#routes/register.mjs'
 
 dotenv.config()
 

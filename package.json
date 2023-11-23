@@ -13,6 +13,16 @@
   "keywords": [],
   "author": "Loïc MAES",
   "license": "MIT",
+  "imports": {
+    "#/*": "./*",
+    "#utils/*": "./utils/*",
+    "#db/*": "./database/*",
+    "#routes/*": "./routes/*",
+    "#handlers/*": "./handlers/*",
+    "#structs/*": "./structures/*",
+    "#models/*": "./database/models/*",
+    "#controllers/*": "./controllers/*"
+  },
   "devDependencies": {
     "ascii-table3": "^0.9.0",
     "mariadb": "^3.2.2",
