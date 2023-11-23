@@ -3,13 +3,13 @@
  * @author Loïc MAES
  * @year 2023
  */
-const fs = require('fs')
+import fs from 'fs'
 
-function isDirectory (path) {
+export function isDirectory (path) {
     return fs.lstatSync(path).isDirectory()
 }
 
-function recover (path, recursive) {
+export default function recover (path, recursive) {
     const files = []
 
     fs.readdirSync(path).forEach(file => {
@@ -17,13 +17,8 @@ function recover (path, recursive) {
 
         if (file.includes('-lock.')) return
         if (recursive && isDirectory(child)) recover(`${child}/`, recursive).forEach(f => files.push(`${file}/${f}`))
-        else if (file.endsWith('.js')) files.push(file)
+        else if (file.endsWith('.mjs')) files.push(file)
     })
 
     return files
-}
-
-module.exports = {
-    recover,
-    isDirectory
 }

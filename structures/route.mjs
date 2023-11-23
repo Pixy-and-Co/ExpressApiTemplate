@@ -1,11 +1,11 @@
-class HttpMethod {
+export class HttpMethod {
     static GET = 'get'
     static POST = 'post'
     static PUT = 'put'
     static DELETE = 'delete'
 }
 
-class Route {
+export class Route {
     method
     path
     middlewares
@@ -19,7 +19,7 @@ class Route {
     }
 }
 
-class HttpStatus {
+export class HttpStatus {
     static OK = 200
     static CREATED = 201
     static ACCEPTED = 202
@@ -33,10 +33,4 @@ class HttpStatus {
     static CONFLICT = 409
     // Server error
     static INTERNAL_ERROR = 500
-}
-
-module.exports = {
-    HttpMethod,
-    HttpStatus,
-    Route
 }

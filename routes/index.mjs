@@ -1,8 +1,8 @@
-const { recover } = require('@handlers/files.handler')
-const { Route } = require('@structs/route')
-const { AsciiTable3 } = require('ascii-table3')
+import { AsciiTable3 } from 'ascii-table3'
+import { Route } from '../structures/route.mjs'
+import recover from '../handlers/files.handler.mjs'
 
-function registerRoutes (app) {
+export default async function registerRoutes (app) {
     const files = recover('./routes', true)
     const table = new AsciiTable3('Routes')
 
@@ -11,9 +11,12 @@ function registerRoutes (app) {
         return console.log(table.toString().slice(0, -1))
     }
 
-    files.filter(file => file !== 'index.js').forEach(file => {
+    for (const file of files) {
+        if (file === 'index.mjs') continue
+
         try {
-            const route = require(`../routes/${file}`)
+            let route = await import(`../routes/${file}`)
+            route = route.default
 
             if (route instanceof Array) route.forEach(r => {
                 registerRoute(app, r)
@@ -27,13 +30,13 @@ function registerRoutes (app) {
         } catch (e) {
             table.addRow('', `"${file}"`, '🔸', e)
         }
-    })
+    }
 
     table.setHeading('Method', 'Name', 'Status', 'Error')
     console.log(table.toString().slice(0, -1))
 }
 
-function registerRoute (app, route) {
+export function registerRoute (app, route) {
     if (!route) throw new Error(`Can't register an undefined route!`)
 
     switch (route.method) {
@@ -53,5 +56,3 @@ function registerRoute (app, route) {
             throw new Error(`Not implemented or invalid http method!`)
     }
 }
-
-module.exports = registerRoutes
