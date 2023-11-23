@@ -28,7 +28,7 @@ export default async function registerRoutes (app) {
             }
             else table.addRow('', `"${file}"`, '🔸', `Can't load a route which is not actually a route!`)
         } catch (e) {
-            table.addRow('', `"${file}"`, '🔸', e)
+            table.addRow('', `"${file}"`, '🔸', e.message)
         }
     }
 
