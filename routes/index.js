@@ -1,6 +1,6 @@
-const { recover } = require('./files.handler')
+const { recover } = require('@handlers/files.handler')
+const { Route } = require('@structs/route')
 const { AsciiTable3 } = require('ascii-table3')
-const { Route } = require('../structures/route')
 
 function registerRoutes (app) {
     const files = recover('./routes', true)
@@ -11,7 +11,7 @@ function registerRoutes (app) {
         return console.log(table.toString().slice(0, -1))
     }
 
-    files.forEach(file => {
+    files.filter(file => file !== 'index.js').forEach(file => {
         try {
             const route = require(`../routes/${file}`)
 
@@ -54,7 +54,4 @@ function registerRoute (app, route) {
     }
 }
 
-module.exports = {
-    registerRoute,
-    registerRoutes
-}
+module.exports = registerRoutes
