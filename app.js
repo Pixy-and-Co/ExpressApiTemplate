@@ -1,8 +1,9 @@
 import dotenv from 'dotenv'
 import express from 'express'
-import https from 'https'
+// TODO: import https from 'https'
 import cors from 'cors'
 import registerRoutes from '#routes/register.mjs'
+import initDatabase from '#db/index.mjs'
 
 dotenv.config()
 
@@ -13,6 +14,6 @@ app.use(express.json()).use(cors())
 
 await registerRoutes(app)
 app.listen(port, async _ => {
-    // TODO: load database
+    await initDatabase()
     console.log(`Listening on: http://localhost:${port}/`)
 })

@@ -3,12 +3,14 @@ export class Model {
     attributes
     options
     foreignKeys
+    loadLater
 
-    constructor (name, attributes, options, foreignKeys) {
+    constructor (name, attributes, options, foreignKeys = [], loadLater = false) {
         this.name = name
         this.attributes = attributes
         this.options = options
         this.foreignKeys = foreignKeys
+        this.loadLater = loadLater
     }
 }
 
